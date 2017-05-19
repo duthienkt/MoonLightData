@@ -23,7 +23,7 @@ function dataURItoBlob(dataURI) {
 function NewFeedBuilder() {
     this.tile = "Moonlight Game";
     this.message = "Play with me";
-    this.link = "https://ec2-34-209-82-231.us-west-2.compute.amazonaws.com/moonlight/index.html";
+    this.link = location.href;
     var _this = this;
     this.setTitle = function(v) {
         _this.tile = v;
