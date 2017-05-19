@@ -87,6 +87,19 @@
                     $results[] = $r;
                 }
             } 
+            
+        $sql = "update music set count = count+1 where musicId = ".$_SESSION["musicId"].";";
+             $debug = $sql;
+             $results = array();
+  //Get result
+            $sqlresult = mysqli_query($link,$sql);
+    
+            if ($sqlresult){
+                $status = "OK";
+                while($r = mysqli_fetch_assoc($sqlresult)) {
+                    $results[] = $r;
+                }
+            } 
         
     }
     else
