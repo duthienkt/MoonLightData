@@ -275,7 +275,7 @@ var playAct = function(act) {
                     musicId: p.store.bundle.songInf.musicId,
                     score: score
                 }, function(res) {
-                    // console.log(res);
+                    console.log(res);
                 });
             }
         }

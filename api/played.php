@@ -88,7 +88,7 @@
                 }
             } 
             
-        $sql = "update music set count = count+1 where musicId = ".$_SESSION["musicId"].";";
+        $sql = "update music set count = count+1 where musicId = '".$_POST["musicId"]."';";
              $debug = $sql;
              $results = array();
   //Get result
@@ -112,8 +112,8 @@
     $apiRes = array(
         'status'=> $status,
         'results'=> $results
-        // ,
-        // 'debug' =>$debug
+        ,
+        'debug' =>$debug
     );
     print json_encode($apiRes);
 ?>
