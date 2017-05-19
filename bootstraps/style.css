@@ -1,0 +1,65 @@
+body{
+	background: url(../image/bg_3.jpeg) no-repeat center fixed;
+	background-size: cover;
+}
+#body{
+	margin-left: 20px;
+	width: 750px;
+	margin-top: 130px;
+	height: 100%;
+}
+#header{
+	height: 100px;
+	margin: auto;
+}
+h1{
+	color: #aa0000;
+	font-size: 3em;
+	text-align: center;
+}
+div.tab {
+    overflow: hidden;
+    border-bottom: 2px solid #ccc; 
+    padding-left: 20px;
+}
+
+/* Style the links inside the tab */
+div.tab a {
+	width: 130px;
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of links on hover */
+div.tab a:hover {
+    background-color: #ddd;
+    border-radius: 5px 5px 0 0;
+
+}
+
+/* Create an active/current tablink class */
+div.tab a:focus, .active {
+    background-color: #ccc;
+    border-radius: 5px 5px 0 0;
+}
+
+/* Style the tab content */
+.tabcontent {
+	width: 800px;
+    display: none;
+    padding: 6px 12px;
+}
+.content{
+	width: 450px;
+	float: left;
+}
+.aside{
+	width: 300px;
+	float: left;
+}

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Register</title>
+	<link href="bootstraps/bootstrap.css" rel="stylesheet">
+	<link rel="stylesheet" href="bootstraps/include.css" type="text/css" />
+	<script src="jquery/jquery-latest.js"></script>
+	<script src="jquery/jquery-3.1.1.min.js"></script>
+	<script src="p5js/p5.js" type="text/javascript"></script>
+    <script src="p5js/p5.dom.js" type="text/javascript"></script>
+    <script src="p5js/p5.sound.js" type="text/javascript"></script>
+    <script src="menu_top.js" type="text/javascript"></script>
+    
+	
+	<style type="text/css">
+		body {
+			background: url('image/bg_register.png') no-repeat center fixed;
+			background-size: cover;
+		}
+		.register-header {
+			margin: 30px;
+			color:#000fff;
+			border-bottom: 2px solid #000fff;
+		}
+		.not_empty{
+			color: #ff0000;
+		}
+		#footer{
+			border-top: 4px solid rgba(0, 0, 222, 0.3);
+			background-color: rgba(0, 200, 222, 0.4);
+		}
+		a{
+			text-decoration: none;
+			color: #000000;
+		}
+		p{
+			margin: 10px;
+			padding: 2px;
+		}
+		#ctent{
+			margin: 10px;
+			padding: 5px;
+		}
+		#lichsu, #thegame, #thedt{
+			border: 2px solid #000fff;
+			border-radius: 0 0 10px 10px;
+		}
+		.form{
+			margin: 10px;
+		}
+		#content{
+			margin-left: 50px;
+		}
+		
+		.mtop{
+			margin-top:10px;
+			width:80px;
+		}
+	</style>
+</head>
+<body>
+	<?php
+		include "include/header.html";
+	?>
+	<div class="row" id="content">
+		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 body">
+			<div class="register-header"><h1>Register</h1></div>
+			<div class="row" id="content">
+				<div class="col-lg-12 col-md-10 col-sm-11 col-xs-12 form">
+					<form method="POST" class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF'];?>">
+						<p class="not_empty" id="error"></p>
+						<div class="form-group">
+						  <label for="hoten" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Fullname<span class="not_empty">*</span></label>
+						    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-10">
+						      <input type="text" class="form-control" id="hoten" name="fullname" placeholder="">
+						    </div>
+						</div>
+			
+						<div class="form-group">
+						  <label for="tendangnhap" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Username<span class="not_empty">*</span></label>
+						    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-10">
+						      <input type="text" class="form-control" id="tendangnhap" name="username" placeholder="">
+						    </div>
+						</div>
+			
+						<div class="form-group">
+						  <label for="email" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Email<span class="not_empty">*</span></label>
+						    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-10">
+						      <input type="text" class="form-control" id="email" name="email" placeholder="">
+						    </div>
+						</div>
+						
+						<div class="form-group">
+						  <label for="phone" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Phone number</label>
+						    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-10">
+						      <input type="text" class="form-control" id="phone" name="phone" placeholder="">
+						    </div>
+						</div>
+			
+						<div class="form-group">
+						  <label for="password" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">Password<span class="not_empty">*</span></label>
+						    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-10">
+						      <input type="password" class="form-control" id="password" name="password" placeholder="">
+						     </div>
+						</div>
+			
+						<div class="form-group">
+						  <label for="re-password" class="col-lg-3 col-md-3 col-sm-3 col-xs-6 control-label">Re-password<span class="not_empty">*</span></label>
+						    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-10">
+						      <input type="password" class="form-control" id="re-password" name="re-password" placeholder="">
+						    </div>
+						</div>
+			
+						<div class="form-group">
+						  <label for="gioitinh" class="col-lg-3 col-md-3 col-sm-3 col-xs-2 control-label">Sex</label>
+						    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+						    	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+						      <label class="radio-inline">
+								  <input type="radio" name="sex" id="inlineRadio1" value="Male"> Male
+							  </label>
+							  </div>
+							  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+							  <label class="radio-inline">
+								  <input type="radio" name="sex" id="inlineRadio2" value="Female"> Female
+							  </label>
+							  </div>
+						    </div>
+						</div>
+			
+						<div class="form-group">
+					        <label for="birthday" class="col-lg-3 col-md-3 col-sm-3 col-xs-6 control-label">Birthday</label>
+					        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-10">
+						        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						            <select name="year" id="year" size="1" class="mtop"></select>
+						        </div>   
+						        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
+						            <select name="month" id="month" size="1" class="mtop"></select>
+						        </div>
+						        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						            <select name="day" id="day" size="1" class="mtop">
+										<option value=" " selected="selected">--Date--</option>
+									</select>
+						        </div>
+					        </div>
+					    </div>
+						<br>
+						<div class="form-group">
+						    <div class="col-sm-offset-6">
+						      	<button type="submit" class="btn btn-primary" name="reset">Cancel</button>
+						    	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
+						    </div>
+						</div>
+					</form>
+		
+				<!-- Validate -->
+					<script type="text/javascript">
+						var seYear = $('#year');
+					    var date = new Date();
+					    var cur = date.getFullYear();
+			
+					    seYear.append('<option value="">--Year--</option>');
+					    for (var i = cur; i >= 1920; i--) {
+					        seYear.append('<option value="'+i+'">'+i+'</option>');
+					    };
+					    
+					    //Tháng tự động điền vào select
+					    var seMonth = $('#month');
+					    var date = new Date();
+					    
+					    var month=new Array();
+					    for(var i = 0; i<12 ; i++){
+					    	month[i] = "" + (i+1);
+					    }
+			
+					    seMonth.append('<option value="">--Month--</option>');
+					    for (var i = 0; i < 12; i++) {
+					        seMonth.append('<option value="'+i+'">'+month[i]+'</option>');
+					    };
+					    
+					    //Ngày tự động điền vào select
+					    function dayList(month,year) {
+					        var day = new Date(year, month, 0);
+					        return day.getDate();
+					    }    
+					    
+					    $('#year, #month').change(function(){
+					        //Đoạn code lấy id không viết bằng jQuery để phù hợp với đoạn code bên dưới
+					        var y = document.getElementById('year');
+					        var m = document.getElementById('month');
+					        var d = document.getElementById('day');
+					        
+					        var year = y.options[y.selectedIndex].value;
+					        var month = m.options[m.selectedIndex+1].value;
+					        var day = d.options[d.selectedIndex].value;
+					        if (day == ' ') {
+					            var days = (year == ' ' || month == ' ')? 31 : dayList(month,year);
+					            d.options.length = 0;
+					            d.options[d.options.length] = new Option('--Date--',' ');
+					            for (var i = 1; i <= days; i++)
+					            d.options[d.options.length] = new Option(i,i);
+					        }
+					    });
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php
+		if(isset($_POST["submit"])){
+			$fullname = mysqli_real_escape_string($conn, $_POST["fullname"]);
+			$username = mysqli_real_escape_string($conn, $_POST["username"]);
+			$email = mysqli_real_escape_string($conn, $_POST["email"]);
+			$pword = mysqli_real_escape_string($conn, $_POST["password"]);
+			$password = mysqli_real_escape_string($conn, md5($_POST["password"]));
+        	$re_password = mysqli_real_escape_string($conn, md5($_POST["re-password"]));
+        	$phone= mysqli_real_escape_string($conn, $_POST["phone"]);
+			$reg_pwd = "/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$/";
+			
+          	if(empty($fullname) || empty($username) || empty($email) || empty($password) || empty($re_password)){
+        		echo "<script>document.getElementById('error').innerHTML='Please enter full infomation.';</script>";
+        	}
+        	else{
+        		$query = mysqli_query($conn, "select * from user where `userName` = '$username'");
+        		$row = mysqli_fetch_array($query);
+        		$query1 = mysqli_query($conn, "select * from user where `email` = '$email'");
+        		$row1 = mysqli_fetch_array($query1);
+        	
+        		if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+	        		echo "<script>document.getElementById('error').innerHTML='Email invalidate. Please re-enter infomation.';</script>";
+        		}
+        		else if(!preg_match($reg_pwd, $pword, $matchs)){
+        			echo "<script>document.getElementById('error').innerHTML='The password has at least 6 characters and includes letters, numbers and special characters. Please re-enter infomation.';</script>";
+        		}
+        		else if($row){
+        			echo "<script>document.getElementById('error').innerHTML='Username already existed. Please re-enter infomation.';</script>";
+        		}
+        		else if($row1){
+        			echo "<script>document.getElementById('error').innerHTML='Email already existed. Please re-enter infomation.';</script>";
+        		}
+        		else if(!is_numeric($phone)){
+        			echo "<script>document.getElementById('error').innerHTML='Phone number not available. Please re-enter infomation.';</script>";
+        		}
+        		else if($re_password != $password){
+        			echo "<script>document.getElementById('error').innerHTML='Re-password does not match password. Please re-enter infomation.';</script>";
+        		}
+        		else{
+        			$sex = mysqli_real_escape_string($conn, $_POST["sex"]);
+        			$date = mysqli_real_escape_string($conn, $_POST["day"]);
+        			$month = mysqli_real_escape_string($conn, $_POST["month"]);
+        			$year = mysqli_real_escape_string($conn, $_POST["year"]);
+        			$d = mktime(0, 0, 0, $month + 1, $date, $year);
+        			$birthday = date("Y-m-d h:i:s", $d);
+        			
+        			date_default_timezone_set('Asia/Ho_Chi_Minh');
+        			$createDate = date("Y-m-d h:i:s");
+        			
+        		
+					$sql = "INSERT INTO `user` (`userName`, `fullName`, `email`, `phone`, `password`, `sex`, `birthday`, `createDay`, `coin`) VALUES('$username', '$fullname', '$email', '$phone','$password', '$sex', '$birthday', '$createDate', 0)";
+				
+					if(mysqli_query($conn, $sql)){
+						echo "<script>alert('Successful registration.');
+									window.location='login.html'</script>";
+					}
+					else{
+						echo "<script>alert('Registration failed.');</script>"; 
+					}
+        		}
+        	}
+		}
+		
+		else if(isset($_POST["reset"])){
+			echo "<script>window.location = 'top.html';</script>";
+		}
+	include "include/feedback.html";
+	include "include/footer.html";
+	?>
+</body>
+</html>

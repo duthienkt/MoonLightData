@@ -1,0 +1,78 @@
+
+<div class="feedback" id="feedback-box"><h4>Feedback</h4>		
+	<a class="close" href="#">
+		<img class="img-close" title="Close Window" alt="Close" src="image/close.png" width="25px" height="25px" />
+	</a>
+	<form class="feedback-content" method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
+		<label class="username">
+			<label for="username">Feedback of <?php echo $row_user['userName'];?></label>
+		</label>
+		<label class="contentname">
+			<label for="contentid">Topic</label>
+			<input id="contentid" type="text" autocomplete="on" name="topic" placeholder="" value="" />
+		</label>
+		<label class="content-form">
+			<label for="contentdet">Content</label>
+			<textarea id="contentdet" name="content"></textarea>
+		</label>
+		<input style="width: 100px" class="button submit-button" type="submit" name="submit1" value="Send"/>
+	</form>
+</div>
+<?php
+	if(isset($_POST["submit1"])){
+		$topic = mysqli_real_escape_string($conn, $_POST["topic"]);
+		$content = mysqli_real_escape_string($conn, $_POST["content"]);
+			
+		if(empty($topic)){
+			$topic = "No topic";
+		}
+		if(empty($content)){
+			echo "<script>alert('Feedback isn\'t sent.');</script>";
+		}
+		else{
+			date_default_timezone_set('Asia/Ho_Chi_Minh');
+	       	$fbDate = date("Y-m-d h:i:sa");
+	       	$idFb = $id . "fb" . date(dmy);
+	       	$sql = "INSERT INTO feedback(idfeedback, fbTitle, fbContent, fbDate, user_iduser) 
+	       						VALUES('$idFb', '$topic', '$content', '$fbDate', '$id')";
+			if(mysqli_query($conn, $sql)){
+				echo "<script> alert('Sent feedback.');
+			 	$('#over, .feedback').fadeOut(300 , function() {
+			 		$('#over').remove();
+			 	});</script>";
+			}
+			else{
+				echo "<script>alert('Feedback isn\'t sent.');</script>"; 
+			}
+		}
+	}
+	if($row_user){
+?>
+	<a class="feedback-window btn-top" href="#feedback-box" alt="Feedback"><img src="image/feedback.png" title="Feedback" width="40px" height="40px"></a>
+<?php 
+}
+?>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('a.feedback-window').click(function() {
+	        //lấy giá trị thuộc tính href - chính là phần tử "#feedback-box"
+	        var feedbackBox = $(this).attr('href');
+		    //cho hiện hộp đăng nhập trong 300ms
+		    $(feedbackBox).fadeIn(300);
+	    	// thêm phần tử id="over" vào sau body
+	    	$('body').append('<div id="over">');
+	    	$('#over').fadeIn(300);
+	    	return false;
+	    });
+
+		// khi click đóng hộp thoại
+		$(document).on('click', "a.close, #over", function() {
+			if(confirm("Do you want to close feedback box?") == true){
+			$('#over, .feedback').fadeOut(300 , function() {
+				$('#over').remove();
+			});
+			return false;
+		}
+		});
+	});
+</script>

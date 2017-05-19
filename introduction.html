@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Introduction</title>
+	<meta charset="utf-8">
+	<link href="bootstraps/bootstrap.css" rel="stylesheet">
+	<link rel="stylesheet" href="bootstraps/include.css" type="text/css" />
+	<script src="jquery/jquery-3.1.1.min.js"></script>
+	
+	<script src="p5js/p5.js" type="text/javascript"></script>
+    <script src="p5js/p5.dom.js" type="text/javascript"></script>
+    <script src="p5js/p5.sound.js" type="text/javascript"></script>
+    <script src="menu_top.js" type="text/javascript"></script>
+    
+	
+	<style type="text/css">
+		body{
+			background: url(image/introduction.png) no-repeat center fixed;
+			background-size: cover;
+		}
+		#footer{
+			border-top: 4px solid rgba(0, 0, 222, 0.3);
+			background-color: rgba(0, 200, 222, 0.4);
+		}
+		a{
+			text-decoration: none;
+			color: #000000;
+		}
+		p{
+			margin: 10px;
+			padding: 2px;
+		}
+		h1{
+			color:#000fff;
+			border-bottom: 2px solid #000fff;
+			margin: 30px;
+			padding: 10px;
+		}
+		#content{
+			margin-left: 50px;
+		}
+		.introduction{
+			font-size: 1.2em;
+		}
+	</style>
+</head>
+<body>
+	<?php
+		include "include/header.html";
+	?>
+	<div class="row" id="content">
+		<div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 body">
+			<div class="register-header"><h1>Moonlight game introduction</h1></div>
+			<div class="row">
+				<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 introduction">
+					<ul>
+						<li>
+							<h2>Hướng dẫn chơi game:</h2>
+							<p>Moonlight là game chơi nhạc khá đơn giản, người chơi được chơi miễn phí các vòng đầu tiên mà không cần đăng kí tài khoản. Tuy nhiên sau các vòng miễn phí thì người chơi cần đăng kí tài khoản, nạp xu để có thể mua bài hát hoặc chơi các vòng khác.</p>
+							<p>Mỗi vòng chơi là một bài nhạc, màn hình sẽ hiển thị những thanh ngang chạy từ trên xuống, mỗi thanh tương ứng với một nốt nhạc, người chơi sẽ chạm vào thanh ngang đó để tạo ra các nốt nhạc, nếu người chơi chạm vào thanh không đúng lúc hoặc quá trễ, lúc đó thanh ngang đã biến mất thì người chơi sẽ mất điểm, cũng như không hoàn thành tốt bài nhạc.</p>
+							<p>Sau đây là các bước bắt đầu chơi game:</p>
+							<ol type="1">
+								<li>Người chơi nhấn nút Chơi trên thanh Menu để vào game</li>
+								<li>Khi vào game, người chơi sẽ vòng chơi, các vòng chơi có hình ổ khóa là những vòng chơi người chơi chưa được phép chơi, người chơi chỉ chơi được những vòng cho phép.</li>
+								<li>Sau khi chọn vòng chơi, trang web chơi game sẽ hiển thị, người chơi sẽ bắt đầu chơi game.</li>
+							</ol>
+						</li>
+						<li>
+							<h2>Cách tính điểm:</h2>
+							<p>Như đã hướng dẫn trên, người chơi sẽ chạm vào các thanh ngang để tạo ra nốt nhạc, mỗi nốt nhạc đúng sẽ ứng với một điểm, khi người dùng đúng càng nhiều nốt liên tiếp thì điểm sẽ được tính khác nhau, điểm nhiều hơn.</p>
+							<ul>
+								<li>Đúng 1 nốt: 1 điểm</li>
+								<li>Đúng 2 nốt: 2 điểm</li>
+								<li>Đúng 3 nốt: 4 điểm</li>
+								<li>.....<li>
+							</ul>
+						</li>
+						<li>
+							<h2>Hướng dẫn nạp xu</h2>
+							<p>Có 2 hình thức nạp xu để các thành viên nạp xu mua bài hát hay hoặc mua vòng chơi:</p>
+							<ol style="1">
+								<li>Nạp xu bằng thẻ game: Với hình thức này người chơi chỉ cần nhập số seri và mã thẻ là có thể nạp xu vào tài khoản của mình.</li>
+								<li>Nạp xu bằng thẻ điện thoại: Hình thức nạp xu này cho phép người chơi nạp xu với các nhà mạng phổ biến: Viettel, Vinaphone, Mobiphone, Vietnammobile, Beeline. Sau khi chọn nhà mạng, người dùng nhập số seri và mã thẻ tương tự như nạp xu bằng thẻ game.</li>
+							</ol>
+							<p>Người chơi cũng có thể xem lịch sử giao dịch của mình bằng cách chọn vào tab lịch sử giao dịch, ở đây người chơi có thể xem việc mua bài hát, mua vòng chơi, hoặc việc nạp xu của mình trong bảng một cách rõ ràng.</p>
+						</li>
+					</ul>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<?php
+		include "include/feedback.html";
+		include "include/footer.html";
+	?>
+</body>
+</html>

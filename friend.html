@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Friend</title>
+	<link rel="stylesheet" type="text/css" href="bootstraps/bootstrap.css">
+	<link rel="stylesheet" href="bootstraps/include.css" type="text/css" />
+	
+	<script src="jquery/jquery-3.1.1.min.js"></script>
+	<script src="p5js/p5.js" type="text/javascript"></script>
+    <script src="p5js/p5.dom.js" type="text/javascript"></script>
+    <script src="p5js/p5.sound.js" type="text/javascript"></script>
+    <script src="menu_top.js" type="text/javascript"></script>
+    
+	<style type="text/css">
+		body{
+			background: url(image/bg_home.jpg) no-repeat center fixed;
+			background-size: cover;
+		}
+		#title{
+			font-size: 4em;
+			font-weight: bold;
+			color: #ff0000;
+			font-family: cursive;
+		}
+		#pcham{
+			font-size: 1em;
+			font-family: sans-serif;
+			margin-left: 40px;
+		}
+		div.tab {
+			overflow: hidden;
+			border-bottom: 2px solid #000fff; 
+			padding-left: 20px;
+			margin-top: 20px;
+		}
+
+		/* Style the links inside the tab */
+		div.tab a {
+			width: 250px;
+			float: left;
+			display: block;
+			color: black;
+			text-align: center;
+			padding: 14px 16px;
+			text-decoration: none;
+			transition: 0.3s;
+			font-size: 17px;
+		}
+
+		/* Change background color of links on hover */
+		div.tab a:hover {
+			background-color: #00ffff;
+			border: 1px solid #000fff;
+			border-bottom: none;
+			border-radius: 5px 5px 0 0;
+		}
+
+		/* Create an active/current tablink class */
+		div.tab a:focus, .active {
+			background-color: #0fffff;
+			border: 1px solid #000fff;
+			border-bottom: none;
+			border-radius: 5px 5px 0 0;
+		}
+
+		/* Style the tab content */
+		.tabcontent {
+			display: none;
+			padding: 6px 12px;
+		}
+		.tablinks{
+			font-size: 2.2em;
+			font-weight: bold;
+		}
+		.margin{
+			margin: 20px;
+			margin-top: 50px;
+		}
+		.th-gd{
+			background-color: #000fff;
+			color: #ffffff;
+			font-size: 1.2em;
+			text-align: center;
+			border: 2px solid black;
+		}
+		table, tr, td{
+			border:2px solid black;
+		}
+		td, .color{
+			color: #000000;
+			font-size: 1.2em;
+			text-align: center;
+		}
+		#footer{
+			border-top: 4px solid rgba(0, 0, 222, 0.3);
+			background-color: rgba(0, 200, 222, 0.4);
+		}
+		#topdiem, #topsong{
+			border: 2px dashed black;
+			border-radius: 10px;
+			padding: 10px;
+			margin: 10px;
+		}
+		#topdiem{
+			margin-top: 500px;
+		}
+		a{
+			text-decoration: none;
+			color: #000000;
+		}
+		p{
+			margin: 10px;
+			padding: 2px;
+		}
+		.btn{
+			font-size: 0.9em;
+		}
+		.content{
+			margin-left: 50px;
+		}
+		.slide{
+			border-radius: 10px;
+			width: 640px;
+			height: 330px;
+		}
+		.neoslideshow{
+			position: relative;
+		}
+		.neoslideshow img {
+			position:absolute;
+			top: 20px;
+			left:30px;
+		}
+		.table tr:nth-child(2n+1){
+			background-color: rgba(50, 210, 222, 0.7);
+			
+		}
+		.table tr:nth-child(2n){
+			background-color: rgba(170, 240, 165, 0.7);
+			
+		}
+	</style>
+</head>
+<body>
+	<?php
+		include "include/header.html";
+	?>
+	
+	<div class="row content">
+		<div class="col-lg-8 col-md-8 col-sm-10 col-xs-12 margin">
+		    <form action="" method="POSt">
+    		    <div class="form-group">
+    				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-10">
+    				    <input type="text" class="form-control" id="search" name="search" placeholder="Please enter username">
+    				</div>
+    				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+    				    <input type="submit" class="btn btn-primary" name="submit" value="Search"/>
+    				</div>
+    			</div>
+			</form>
+		</div>
+	</div>
+	<div class="row content">
+	    <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12 margin">
+			<?php 
+			    if($row_user){
+			?>
+			<p id="ketqua">
+			    <?php
+			        if(isset($_POST['submit'])){
+		                $keyword = $_POST['search'];
+            		    $query = mysqli_query($conn, "select * from user where userName like '%$keyword%'");
+            		    $num_row = mysqli_num_rows($query);
+            		    if($num_row == 0){
+            		        echo "No result for " . $keyword;
+            		    }
+            		    else{
+            		        echo "<table class='table'>";
+            		        echo $num_row . " result for '" . $keyword . "':</br>";
+            		        ?>
+						<tr>
+							<th class="th-gd">Fullname</th>
+							<th class="th-gd">Username</th>
+							<th class="th-gd">Email</th>
+							<th class="th-gd">Phone number</th>
+							<th class="th-gd">Add friend</th>
+						</tr>
+            		        <?php
+            		        while($row = mysqli_fetch_array($query)){
+            		            $user1 = $row_user['userName'];
+            		            $user2 = $row['userName'];
+            		            $query_friend = mysqli_query($conn, "select * from friend where (userName1 = '$user1' && userName2 = '$user2') || (userName2 = '$user1' && userName1 = '$user2')");
+            		            ?>
+            		            <tr>
+            		                <td>
+            		                    <?php echo $row['fullName'];?>
+            		                </td>
+            		                <td>
+            		                    <?php echo $user2;?>
+            		                </td>
+            		                <td>
+            		                    <?php echo $row['email'];?>
+            		                </td>
+            		                <td>
+            		                    <?php echo $row['phone'];?>
+            		                </td>
+            		                <td>
+            		                    <?php
+            		                    if(mysqli_num_rows($query_friend)){
+            		                        $row_friend = mysqli_fetch_array($query_friend);
+            		                        if($row_friend['status'] == 1){
+            		                            echo "Friend";
+            		                        }
+            		                        else if($row_friend['status'] == 0){
+            		                            echo "<input type='submit' id='accept".$row['iduser']."' name='accept' value='Accept' onclick='accept(" . $row['iduser'] . ")'/>";
+            		                        }
+            		                    }
+            		                    else{
+            		                        echo "<input type='submit' id='addfriend".$row['iduser']."' name='addfriend' value='Add friend' onclick='addfriend(" . $row['iduser'] . ")'/>";
+            		                    }
+            		                    ?>
+            		                  </td>
+            		            <?php
+            		        }
+            		        echo "</table>";
+            		    }
+            		}
+			    ?>
+			</p>
+			<p>
+			    <h3>Your friend</h3>
+			    <table class="table">
+			        <tr>
+			            <th class="th-gd">Fullname</th>
+					    <th class="th-gd">Username</th>
+						<th class="th-gd">Email</th>
+						<th class="th-gd">Phone number</th>
+			        </tr>
+			        <?php
+			            $user = $row_user['userName'];
+			            $query_friend = mysqli_query($conn, "select * from friend where (userName1 = '$user' || userName2 = '$user') && status = 1");
+			            if(mysqli_num_rows($query_friend) > 0){
+			                while($row = mysqli_fetch_array($query_friend)){
+			                    $rowfriend = "";
+			                    if($user == $row['userName1']) $rowfriend = $row['userName2'];
+			                    else $rowfriend = $row['userName1'];
+			                    $queryuser = mysqli_query($conn, "select * from user where userName = '$rowfriend'");
+			                    if($rowuser = mysqli_fetch_array($queryuser)){
+			                    ?>
+			                        <tr>
+			                            <td><?php echo $rowuser['fullName'];?></td>
+			                            <td><?php echo $rowfriend;?></td>
+			                            <td><?php echo $rowuser['email'];?></td>
+			                            <td><?php echo $rowuser['phone'];?></td>
+			                        </tr>
+			                    <?php
+			                    }
+			                }
+			            }
+			        ?>
+			    </table>
+			</p>
+			
+			<p>
+			    <h3>Your request</h3>
+			    <table class="table">
+			        <tr>
+			            <th class="th-gd">Fullname</th>
+					    <th class="th-gd">Username</th>
+						<th class="th-gd">Email</th>
+						<th class="th-gd">Phone number</th>
+						<th class="th-gd">Add friend</th>
+			        </tr>
+			        <?php
+			            $user = $row_user['userName'];
+			            $query_friend = mysqli_query($conn, "select * from friend where (userName1 = '$user' || userName2 = '$user') && status = 0");
+			            if(mysqli_num_rows($query_friend) > 0){
+			                while($row = mysqli_fetch_array($query_friend)){
+			                    $rowfriend = "";
+			                    if($user == $row['userName1']) $rowfriend = $row['userName2'];
+			                    else $rowfriend = $row['userName1'];
+			                    $queryuser = mysqli_query($conn, "select * from user where userName = '$rowfriend'");
+			                    if($rowuser = mysqli_fetch_array($queryuser)){
+			                    ?>
+			                        <tr>
+			                            <td><?php echo $rowuser['fullName'];?></td>
+			                            <td><?php echo $rowfriend;?></td>
+			                            <td><?php echo $rowuser['email'];?></td>
+			                            <td><?php echo $rowuser['phone'];?></td>
+			                            <td><input type='submit' name='accept' value='Accept' onclick='accept(<?php echo $row["iduser"]; ?>)'/></td>
+			                        </tr>
+			                    <?php
+			                    }
+			                }
+			            }
+			        ?>
+			    </table>
+			</p>
+			<?php
+			}
+            		else{
+            		    echo "You can not see your friend list, please login";
+            		}
+			?>
+		</div>
+	</div>
+	<script type="text/javascript">
+	    function addfriend(id){
+	        $.ajax({
+	            type: "POST",
+	            url: "include/friend.php",
+	            data:{
+	                addfriend: "addfriend",
+	                id: id
+	            },
+	            success: function(response){
+	                if(response == "success"){
+	                    alert("Sent request");
+	                }
+	            }
+	        })
+	    }
+	</script>
+	<?php
+	include "include/feedback.html";
+	include "include/footer.html";
+	?>
+</body>
+</html>

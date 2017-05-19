@@ -1,0 +1,22 @@
+<?php
+	session_start();
+	include "./connect/connect.php";
+?>
+<div id='sketch-holder' style="float:left"></div>
+<div class="row" id="header">
+	<div id="username">
+		<?php
+			if(!empty($_SESSION["userId"])){
+				$id = intval($_SESSION["userId"]);
+				$query_user = mysqli_query($conn, "select * from user where `iduser` = '$id'");
+				$row_user = mysqli_fetch_array($query_user);
+				if($row_user){
+					echo "<img id='user' src='./image/img_user.png' width='60px' height='60px'><a id='username' href='./infomation.html'>Hello " . $row_user["fullName"] . "</a>";
+				}
+			}
+		?>
+	</div>
+	<div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 col-lg-7 col-md-7 col-sm-7 col-xs-7">
+		<img src="./image/logo.png" width="500px" height="250px">
+	</div>
+</div>

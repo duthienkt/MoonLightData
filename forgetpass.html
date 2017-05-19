@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<script src="p5js/p5.js" type="text/javascript"></script>
+    <script src="p5js/p5.dom.js" type="text/javascript"></script>
+    <script src="p5js/p5.sound.js" type="text/javascript"></script>
+    <script src="menu_top.js" type="text/javascript"></script>
+    <script src="jquery/jquery-3.1.1.min.js"></script>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Forget password</title>
+	<link href="bootstraps/bootstrap.css" rel="stylesheet">
+	<link rel="stylesheet" href="bootstraps/include.css" type="text/css" />
+	<style type="text/css">
+		body {
+			background: url('image/bg_login.jpg') no-repeat center fixed;
+			background-size: cover;
+		}
+		.body{
+			margin-bottom: 150px;
+		}
+		.register-header {
+			height: 100px;
+			margin: auto;
+		}
+		h1{
+			color:#000fff;
+			border-bottom: 2px solid #000fff;
+			margin: 30px;
+			padding: 10px;
+		}
+		#footer{
+			border-top: 4px solid rgba(0, 0, 222, 0.3);
+			background-color: rgba(0, 160, 222, 0.3);
+		}
+		a{
+			text-decoration: none;
+			color: #000000;
+		}
+		p{
+			margin: 10px;
+			padding: 2px;
+		}
+		#content{
+			margin-left: 50px;
+		}
+		.login{
+			margin-bottom: 30px;
+		}
+		span{
+			font-weight: bold;
+		}
+		#username{
+			color: #ffffff;
+		}
+	</style>
+</head>
+<body>
+	<?php
+		include "include/header.html";
+	?>
+	<div class="row" id="content">
+		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 body">
+			<div class="register-header"><h1>Forget password</h1></div>
+			<div class="row">
+				<div class="col-sm-offset-2 col-lg-10 col-md-10 col-sm-12 col-xs-12">
+					<form method="POST" class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF'];?>">
+
+						<div class="form-group">
+							<label for="name" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><h3>Enter your email</h3></label>
+							<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+								<input type="text" class="form-control" id="name" name="email" placeholder="">
+							</div>
+						</div>
+
+						<br>
+						<div class="form-group">
+							<div class="col-sm-offset-5">
+								<button type="submit" class="btn btn-primary" name="reset">Return</button>
+								<button type="submit" class="btn btn-primary" name="submit">Continue</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php
+		if(isset($_POST["submit"])){
+			$email = mysqli_real_escape_string($conn, $_POST["email"]);
+			$query = mysqli_query($conn, "select * from user where `email` = '$email'");
+			$row = mysqli_fetch_array($query);
+			if(empty($email)){
+				echo "<script>alert('Please enter Email.')</script>";
+			}
+			else if($row){
+				echo "<script>window.location = 'forgetpass1.html';</script>";
+			}
+			else{
+				echo "<script>alert('This email isn\'t registered.');</script>";
+			}
+		}
+		else if(isset($_POST["reset"])){
+			echo "<script>window.location = 'login.html';</script>";
+		}
+		
+		include "include/feedback.html";
+		include "include/footer.html";
+	?>
+</body>
+</html>

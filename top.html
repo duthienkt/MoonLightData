@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Top</title>
+	<link rel="stylesheet" type="text/css" href="bootstraps/bootstrap.css">
+	<link rel="stylesheet" href="bootstraps/include.css" type="text/css" />
+	
+	<script src="jquery/jquery-3.1.1.min.js"></script>
+	<script src="p5js/p5.js" type="text/javascript"></script>
+    <script src="p5js/p5.dom.js" type="text/javascript"></script>
+    <script src="p5js/p5.sound.js" type="text/javascript"></script>
+    <script src="menu_top.js" type="text/javascript"></script>
+    
+	<style type="text/css">
+		body{
+			background: url(image/bg_home.jpg) no-repeat center fixed;
+			background-size: cover;
+		}
+		#title{
+			font-size: 4em;
+			font-weight: bold;
+			color: #ff0000;
+			font-family: cursive;
+		}
+		#pcham{
+			font-size: 1em;
+			font-family: sans-serif;
+			margin-left: 40px;
+		}
+		div.tab {
+			overflow: hidden;
+			border-bottom: 2px solid #000fff; 
+			padding-left: 20px;
+			margin-top: 20px;
+		}
+
+		/* Style the links inside the tab */
+		div.tab a {
+			width: 250px;
+			float: left;
+			display: block;
+			color: black;
+			text-align: center;
+			padding: 14px 16px;
+			text-decoration: none;
+			transition: 0.3s;
+			font-size: 17px;
+		}
+
+		/* Change background color of links on hover */
+		div.tab a:hover {
+			background-color: #00ffff;
+			border: 1px solid #000fff;
+			border-bottom: none;
+			border-radius: 5px 5px 0 0;
+		}
+
+		/* Create an active/current tablink class */
+		div.tab a:focus, .active {
+			background-color: #0fffff;
+			border: 1px solid #000fff;
+			border-bottom: none;
+			border-radius: 5px 5px 0 0;
+		}
+
+		/* Style the tab content */
+		.tabcontent {
+			display: none;
+			padding: 6px 12px;
+		}
+		.tablinks{
+			font-size: 2.2em;
+			font-weight: bold;
+		}
+		.margin{
+			margin: 20px;
+			margin-top: 50px;
+		}
+		.th-gd{
+			background-color: #000fff;
+			color: #ffffff;
+			font-size: 1.2em;
+			text-align: center;
+			border: 2px solid black;
+		}
+		table, tr, td{
+			border:2px solid black;
+		}
+		td, .color{
+			color: #000000;
+			font-size: 1.2em;
+			text-align: center;
+		}
+		#footer{
+			border-top: 4px solid rgba(0, 0, 222, 0.3);
+			background-color: rgba(0, 200, 222, 0.4);
+		}
+		#topdiem, #topsong{
+			border: 2px dashed black;
+			border-radius: 10px;
+			padding: 10px;
+			margin: 10px;
+		}
+		#topdiem{
+			margin-top: 500px;
+		}
+		a{
+			text-decoration: none;
+			color: #000000;
+		}
+		p{
+			margin: 10px;
+			padding: 2px;
+		}
+		.btn{
+			font-size: 0.9em;
+		}
+		.content{
+			margin-left: 50px;
+		}
+		.slide{
+			border-radius: 10px;
+			width: 640px;
+			height: 330px;
+		}
+		.neoslideshow{
+			position: relative;
+		}
+		.neoslideshow img {
+			position:absolute;
+			top: 20px;
+			left:30px;
+		}
+		.table tr:nth-child(2n+1){
+			background-color: rgba(50, 210, 222, 0.7);
+			
+		}
+		.table tr:nth-child(2n){
+			background-color: rgba(170, 240, 165, 0.7);
+			
+		}
+	</style>
+</head>
+<body>
+	<?php
+		include "include/header.html";
+	?>
+
+	<div class="row content">
+		<div class="col-lg-8 col-md-8 col-sm-10 col-xs-12 margin">
+			<div class="row">
+				<div class="neoslideshow">
+					<img class="slide" src="image/slider1.jpg"/>
+					<img class="slide" src="image/slider2.jpg"/>
+					<img class="slide" src="image/slider3.jpg"/>
+					<img class="slide" src="image/slider4.jpg"/>
+					<img class="slide" src="image/slider5.jpg"/>
+				</div>
+				<script type="text/javascript">
+					$(function() {
+						$('.neoslideshow img:gt(0)').hide();
+						setInterval(function(){
+							$('.neoslideshow :first-child').fadeOut().next('img').fadeIn().end().appendTo('.neoslideshow');
+						}, 4000);
+					})
+				</script>
+			</div>
+			<div class="row">
+				<div id="topdiem" class="color">
+					<h3>Top the highest score players</h3>
+					<table class="table">
+						<tr>
+							<th class="th-gd">Top</th>
+							<th class="th-gd">Name</th>
+							<th class="th-gd">Level</th>
+							<th class="th-gd">Score</th>
+						</tr>
+						<?php
+	                $query_user = mysqli_query($conn, "select * from rankboard order by -score ");
+	                if(mysqli_num_rows($query_user)>0){
+	                $i=0;
+	                while($row_user = mysqli_fetch_array($query_user)){
+	                if($i < 6){
+	                    $id_user = $row_user['iduser'];
+	                    $query_score = mysqli_query($conn, "select sum(score) as total, count(beatId) as level from beat where user_iduser = '$id_user'");
+	                    $row_score = mysqli_fetch_array($query_score);
+	                    ?>
+						<tr>
+							<td>
+								<?php
+									if($i == 0){
+										echo '<img src="image/top1.png" width="40px" height="40px">';
+									}else if($i == 1){
+										echo '<img src="image/top2.png" width="40px" height="40px">';
+									}else if($i == 2){
+										echo '<img src="image/top3.png" width="40px" height="40px">';
+									}else{
+										echo $i + 1;
+									}
+								?>
+							</td>
+							<td><?php echo $row_user["fullName"];?></td>
+							<td><?php echo $row_score["level"];?></td>
+							<td><?php echo $row_score["total"];?></td>
+						</tr>
+                    <?php
+                    $i = $i + 1;
+                }
+                }
+                }
+                ?>
+					</table>
+					<a href="detail.html?detailName=user">More...</a>
+				</div>
+			</div>
+
+			<div class="row">
+				<div id="topsong" class="color">
+					<h3>Top the most played songs</h3>
+
+					<table class="table">
+						<tr>
+							<th class="th-gd">Top</th>
+							<th class="th-gd">Music name</th>
+							<th class="th-gd">Author</th>
+							<th class="th-gd">Times played</th>
+						</tr>
+						<?php
+						$query_music = mysqli_query($conn, "select * from `music` order by `count` desc");
+						if(mysqli_num_rows($query_music)>0){
+							$i1 = 0;
+							while($i1 < 6){
+								$row_music = mysqli_fetch_array($query_music);
+							
+						?>
+						<tr>
+							<td>
+								<?php
+									if($i1 == 0){
+										echo '<img src="image/top1.png" width="40px" height="40px">';
+									}else if($i1 == 1){
+										echo '<img src="image/top2.png" width="40px" height="40px">';
+									}else if($i1 == 2){
+										echo '<img src="image/top3.png" width="40px" height="40px">';
+									}else{
+										echo $i1 + 1;
+									}
+								?>
+							</td>
+							<td><?php echo $row_music["musicName"];?></td>
+							<td><?php echo $row_music["author"];?></td>
+							<td><?php echo $row_music["count"];?></td>
+						</tr>
+						<?php 
+							$i1 = $i1 + 1;
+							}
+						}?>
+					</table>
+					<a href="detail.html?detailName=music">More...</a>
+				</div>
+			</div>		
+		</div>
+	</div>
+	<?php
+	include "include/feedback.html";
+	include "include/footer.html";
+	?>
+</body>
+</html>
